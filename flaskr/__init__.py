@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template
+from flaskr import db
 
 
 def create_app(test_config=None):
@@ -20,7 +21,6 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-    import db
     db.init_app(app)
     return app
 
@@ -28,13 +28,38 @@ app = create_app()
 
 @app.route('/')
 def index():
+    cur = db.get_db().cursor()
     return render_template('index.html')
 
 
 @app.route('/first_puzzle')
 def first_puzzle():
-    #http://flask.pocoo.org/docs/1.0/patterns/sqlite3/
-    return render_template('puzzle.html')
+    cur = db.get_db().cursor()
+    return render_template('first_puzzle.html')
+
+
+@app.route('/themetagames')
+@app.route('/themetagame')
+def second_puzzle():
+    return render_template('second_puzzle.html')
+
+
+@app.route('/may+15')
+@app.route('/may+16')
+@app.route('/may+19')
+@app.route('/june+17')
+@app.route('/june+18')
+@app.route('/july+14')
+@app.route('/aug+14')
+@app.route('/aug+15')
+@app.route('/aug+17')
+def wrong_date():
+    return render_template('nope.html')
+
+
+@app.route('/july+16')
+def third_puzzle():
+    return render_template('third_puzzle.html')
 
 
 if __name__ == '__main__':
