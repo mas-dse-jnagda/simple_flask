@@ -3,11 +3,12 @@ from flask import Flask, render_template
 from flaskr import db
 
 
-#
+# default page not found handler
 def page_not_found(e):
     return render_template('nope.html'), 404
 
 
+# create the app, inits DB, not really needed right now
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.register_error_handler(404, page_not_found)
@@ -38,6 +39,7 @@ app = create_app()
 def index():
     return render_template('index.html')
 
+
 @app.route('/first_puzzle')
 def first_puzzle():
     cur = db.get_db().cursor()
@@ -56,9 +58,11 @@ def second_puzzle():
 def third_puzzle():
     return render_template('third_puzzle.html')
 
+
 @app.route('/014251')
 def fourth_puzzle():
     return render_template('fourth_puzzle.html')
+
 
 @app.route('/006')
 def fifth_puzzle():
@@ -66,5 +70,5 @@ def fifth_puzzle():
 
 
 if __name__ == '__main__':
-    #app.run(debug=True)
-    app.run(debug=True, host= '0.0.0.0') # to run on computers public ip
+    # app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')  # to run on computers public ip
