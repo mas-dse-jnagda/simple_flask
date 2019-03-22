@@ -56,7 +56,15 @@ def second_puzzle():
 def third_puzzle():
     return render_template('third_puzzle.html')
 
+@app.route('/014251')
+def fourth_puzzle():
+    return render_template('fourth_puzzle.html')
+
+@app.route('/006')
+def fifth_puzzle():
+    return render_template('fifth_puzzle.html')
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    #app.run(debug=True, host= '0.0.0.0') # to run on computers public ip
+    #app.run(debug=True)
+    app.run(debug=True, host= '0.0.0.0') # to run on computers public ip
